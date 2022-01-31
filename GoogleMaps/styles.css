@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans&family=Roboto&display=swap');
+.container-fluid {
+  width: 50vw;
+  height: 50vh;
+  align-content: center;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#subir{
+	position:fixed;
+	bottom:0px;
+	right:0px;
+}
+
+.container {
+  width: 50vw;
+  height: 50vh;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.title {
+  font-family: "Bebas Neue", Sans-serif;
+  font-weight: 600;
+  background-color: #ffffff;
+  border: none;
+  font-size: 40px;
+  color: #00006A;
+  align-content: center;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.button {
+  position: relative;
+  font-family: "Bebas Neue", Sans-serif;
+  background-color: #ffffff;
+  font-weight: 550;
+  border: none;
+  font-size: 18px;
+  color: #00006A;
+  padding: 13px;
+  width: 50%;
+  text-align: center;
+  -webkit-transition-duration: 0.2s; /* Safari */
+  transition-duration: 0.9s;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+.button:hover {
+  color: #ff0000;
+  transition: 0.5s;
+  opacity: 1;
+}
