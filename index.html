@@ -1,15 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <a href="GoogleMaps/index.html">Google Api</a>
-    <a href="counter/index.html">Counter</a>
-    <a href="change-background/index.html">Change background</a>
-    <a href="compras/index.html">Grocery</a>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projects</title>
+    <!-- font-awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    />
+    <!-- styles -->
+    <link rel="stylesheet" href="setup_index/styles.css" />
+  </head>
+  <body>
+    <header id="home">
+      <!-- navbar -->
+      <nav id="nav">
+        <div class="nav-center">
+          <!-- nav header -->
+          <div class="nav-header">
+            <img src="setup_index/logo.svg" class="logo" alt="logo" />
+            <button class="nav-toggle">
+              <i class="fas fa-bars"></i>
+            </button>
+          </div>
+          <!-- links -->
+          <div class="links-container">
+            <ul class="links">
+              <li>
+                <a href="#home" class="scroll-link">home</a>
+              </li>
+              <li>
+                <a href="#about" class="scroll-link">About me</a>
+              </li>
+              <li>
+                <a href="#projects" class="scroll-link">Projects</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- banner -->
+      <div class="banner">
+        <div class="container">
+          <h1>Projetos</h1>
+          <p>
+            Projetos e trabalhos feitos em HTML, CSS, Javascript e Python
+          </p>
+          <a href="#projects" class="scroll-link btn btn-white">Explorar Projetos</a>
+        </div>
+      </div>
+    </header>
+    <!-- about -->
+    <section id="about" class="section">
+      <div class="title">
+        <h2>About <span>Me</span></h2>
+      </div>
+      <div class="section-center">
+        <p>Olá! Me chamo Hans e atualmente estou cursando Engenharia da Computação! Seja bem-vindo ao meu site :)<br> Aqui você encontrará minhas atividades desenvolvidades até o momento<br>GitHub: <a href="https://github.com/HansRafael"target="_blank">github.com/HansRafael</a></p>
+      </div>
+      
+    </section>
+    <!-- services -->
+    <section id="projects" class="section">
+      <div class="title">
+        <h2>My <span>Projects</span></h2>
+      </div>
+
+
+      <div class="photo-project-container">
+        <div class="photo-project">
+          
+          <div class="photo-project-item">
+            
+            <a href="GoogleMaps/index.html" target="_blank">
+              <img class="item-img" src="setup_index/images/googleMaps.png" />
+              <div class="overlayy">
+                <div class="legend">API Google Maps</div>
+              </div>
+            </a>
+
+          </div>
+
+          <div class="photo-project-item">
+            <a href="counter/index.html" target="_blank">
+              <img class="item-img " src="setup_index/images/counter.png" />
+              <div class="overlayy">
+                <div class="legend">Contador</div>
+              </div>
+            </a>
+          </div>
+
+          <div class="photo-project-item">
+            <a href="setup_index/change-background/index.html" target="_blank">
+              <img class="item-img" src="setup_index/images/change_background.png" />
+              <div class="overlayy">
+                <div class="legend">Change Background</div>
+              </div>
+            </a>
+          </div>
+
+          <div class="photo-project-item">
+            <a href="compras/index.html"target="_blank" >
+              <img class="item-img" src="setup_index/images/grocery.png" />
+              <div class="overlayy">
+                <div class="legend">Lista de compras</div>
+              </div>
+            </a>
+
+          </div>
+
+          <div class="photo-project-item">
+            <a href="https://github.com/HansRafael/compilador"target="_blank" >
+              <img class="item-img" src="setup_index/images/compiler.png" />
+            </a>
+            <div class="overlayy">
+              <div class="legend">Compilador ANTLR</div>
+            </div>
+          </div>
+          
+
+          <div class="photo-project-item">
+            <a href="https://github.com/HansRafael/MyProjects/tree/main/SpaceInvader_game"target="_blank" >
+              <img class="item-img" src="setup_index/images/space_invaders.png" />
+            </a>
+            <div class="overlayy">
+              <div class="legend">Game Space Invaders</div>
+            </div>
+          </div>
+
+       
+        </div>
+      </div>
+
+
+    </section>
+
+    <!-- footer -->
+    <footer >
+      <p>
+        Hans Rafael Ruebenich
+        <span id="date"></span>.
+      </p>
+    </footer>
+
+
+
+    <a class="scroll-link top-link" href="#home">
+      <i class="fas fa-arrow-up"></i>
+    </a>
+    <!-- javascript -->
+    <script src="setup_index/app.js"></script>
+  </body>
 </html>
