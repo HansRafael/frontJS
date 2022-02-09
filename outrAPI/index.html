@@ -1,0 +1,187 @@
+        
+<!-- Start main content -->
+<main>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <!-- Start About -->
+        <div class="box-filtro-lojas mb-3">
+    <form class="cidades-topo">
+    <h5 style="color: #073a72; font-size: 18px; text-align: center;">NOSSOS PONTOS DE ATENDIMENTO</h5>
+    <p class="d-block text-center font-12">Selecione a unidade que deseja obter maiores informações:</p>
+        <div class="row">
+ 
+            <div class="col-12 col-lg-6 no-right">
+        
+                <select name="ESTADO" id="ddestadou2" class="form-control" >
+                    <option value="" data-id="" data-name="">Selecione um estado</option>
+
+                    <script type="text/javascript">
+                        $.ajax({url: "https://arplanodigital.com.br/site/unidadesAtendimento.ajax.php?retorno=unidades",type : 'POST', data: 'retorno=unidades', dataType: 'json',
+                            success: function(data){
+                                var options = '<option value="">Selecione um estado</option>';
+                                //console.log(data.length);
+                                estate = 'a';
+                                for(var i = 0; i < data.length; i++){
+                                    if(estate != data[i].estado){
+                                        options += '<option value="' + data[i].estado + '">' + data[i].estado +'</option>';
+                                        estate = data[i].estado;
+                                    }
+                                }
+                                $('#ddestadou2').html(options).show();
+                                }
+                            }); 
+                    </script>
+                    </script>
+                </select>
+            </div>
+            <div class="col-12 col-lg-6 no-left">
+                <select name="CIDADE" id="selectlocation" class="form-control"></select>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="box-lojas-mapa">
+    <div class="box-lojas">
+        <ul>
+        </ul>
+    </div>
+    <div id="map"  style="height: 500px; width: 50%;"></div>
+</div>
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=initMap&libraries=&v=weekly"
+    async
+></script>
+<script type="text/javascript">
+
+function initMap() {
+   var latLong = { lat: -29.471058, lng: -51.808909 };
+ 
+    map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 14,
+        minZoom: 7,
+        maxZoom:18,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        center: latLong,
+    });
+    
+    var iconBase = '../assets/images/';
+  var marker = new google.maps.Marker({
+    position: latLong,
+    map: map,
+    icon: iconBase + 'iconemapa.png'
+  });
+    geocoder = new google.maps.Geocoder();
+}
+  
+
+  
+function geocodeAddress(geocoder, resultsMap,address) {
+    map.setZoom(15);
+    geocoder
+      .geocode({ address: address })
+      .then(({ results }) => {
+        resultsMap.setCenter(results[0].geometry.location);
+        var iconBase = '../assets/images/';
+        var marker = new google.maps.Marker({
+          map: resultsMap,
+          position: results[0].geometry.location,
+          icon: iconBase + 'iconemapa.png'
+          
+          
+        });
+      })
+      .catch((e) =>
+        alert("Geocode was not successful for the following reason: " + e)
+      );
+      
+
+    }
+
+
+
+
+//  ------------- LISTA AS CIDADES ----------- //
+$(document).ready(function(){
+    $('#ddestadou2').change(function(){
+        var select = document.getElementById('ddestadou2');
+        if(select){
+            var estado = select.options[select.selectedIndex].value;
+            console.log('estado='+estado);
+            $.ajax({url: "https://arplanodigital.com.br/site/unidadesAtendimento.ajax.php?retorno=unidades",type : 'POST', data: 'retorno=unidades', dataType: 'json',
+            success: function(data){
+                var options = '<option value="">Selecione uma cidade</option>';
+                //console.log(data.length);
+                city = 'a';
+
+                for(var i = 0; i < data.length; i++){
+                    if(estado == data[i].estado){
+                        if(city != data[i].cidade){
+                            options += '<option value="' + data[i].cidade + '">' + data[i].cidade +'</option>';
+                            city = data[i].cidade;
+                        }
+                    }
+
+                }
+                $('#selectlocation').html(options).show();
+                }
+            }); 
+        }  
+    });
+//  ------------- RETORNANDO O QUE PEGA ----------- //
+    $('#selectlocation').change(function(){
+        var select = document.getElementById("selectlocation");
+        if(select){
+            var cidade = select.options[select.selectedIndex].value;
+            console.log('cidade= '+cidade);
+            $.ajax({url: "https://arplanodigital.com.br/site/unidadesAtendimento.ajax.php?retorno=unidades",type : 'POST', data: 'cidade', dataType: 'json',
+                success: function(data){
+                    var options = '<ul>';
+                    var adress = '';
+                    for(var i = 0; i < data.length; i++){
+                     
+                        if(cidade == data[i].cidade){
+                            adress = (data[i].endereco + ' - ' + data[i].cidade + ' - ' + data[i].estado);
+                            geocodeAddress(geocoder,map,adress);
+
+                            options += '<div id="botones" class="margem-cidades">';
+                            options += '<div class="col-12 " style="text-align: left; ">';
+
+                            options += '<p class="font-14 bold color-blue2 mb-1">'+data[i].fantasia;
+                            options += '<a href="tel:'+data[i].ddd+data[i].tel+'" class="font-12 mb-0"> <br>&nbsp;<i class="fa fa-phone" aria-hidden="true">&nbsp;</i>'+data[i].tel+'</a>';
+                            options += '<p class="font-12 mb-0">';
+                            options += '<i class="fa fa-map-marker" aria-hidden="true">&nbsp;</i> ';
+                            options += data[i].endereco+'  '+data[i].numero+' <br> ';
+                            if((data[i].obsEstac != "") & (data[i].obsEstac != " ") ){
+                                options += data[i].obsEstac+' <br> ';
+                            }
+                            options += data[i].cidade+' / '+data[i].estado+' ';
+                            options += data[i].complemento+'<br>';
+                            options += '</p>';
+                            options += '</div>';
+                            options += '</div>';
+                            options += '</li>';
+
+
+                        }
+
+                        options += '</ul>';
+                  
+                    }
+                    
+                  
+                $('.box-lojas').html(options).show();
+                console.log(adress);   
+                }    
+                
+        });
+
+        }
+    });
+
+});
+
+
+
+
+
+</script>
+</main>
